@@ -11,7 +11,7 @@ public class Analyseur {
     public Analyseur(String texte)  {
         lexical = new StreamTokenizer(new StringReader(texte));
         lexical.ordinaryChar('/');
-        lexical.ordinaryChar('-');
+        lexical.ordinaryChar('-'); 
     }
 
     public Expression analyser() throws IOException, ErreurDeSyntaxe {
