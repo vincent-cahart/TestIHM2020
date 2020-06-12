@@ -1,5 +1,7 @@
 package fr.univ_amu.iut.utilitaires;
 
+import javafx.print.Printer;
+
 import java.util.ArrayList;
 
 public class CalculateurPointsFonction {
@@ -35,6 +37,25 @@ public class CalculateurPointsFonction {
 
   public ArrayList<Basic2DPoint> getListePoints() {
     return listePoints;
+  }
+
+  public static void main(String[] args) {
+    try {
+      Analyseur analyseur = new Analyseur("exp(-x * 0.2) * sin(x)");
+      Expression expression = analyseur.analyser();
+      System.out.println("f(x) = " + expression);
+
+      double xMin = -0.5D;
+      double xMax = 20D;
+      CalculateurPointsFonction calculs = new CalculateurPointsFonction(expression, xMin, xMax);
+      for (Basic2DPoint point : calculs.listePoints) {
+        System.out.println("f(" + point.getX() + ") = " + expression.valeur(point.getX()));
+      }
+      System.out.println("Minimum de la fonction : " + calculs.getYMin());
+      System.out.println("Maximum de la fonction : " + calculs.getYMax());
+    } catch (Exception exception) {
+      exception.printStackTrace();
+    }
   }
 
 }
